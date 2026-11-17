@@ -1,1 +1,5 @@
-`portrait.jpg` is a downscaled copy of the public headshot at https://www.parthdave.me/about/portrait.jpg (Parth Dave). `scripts/render_readme_cards.py` turns it into a navy/silver duotone for the hero card so the README does not depend on the live site at render time.
+`portrait.jpg` is Parth Dave's own public headshot, copied from
+https://www.parthdave.me/about/portrait.jpg on 2026-11-17 for this
+profile README. He owns the photo; it stays here as a local source for
+the navy/silver duotone on the hero card so renders do not depend on
+the live site. Replace or remove it if he wants a different image.

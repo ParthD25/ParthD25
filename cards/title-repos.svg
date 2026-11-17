@@ -27,7 +27,9 @@
 .rg{opacity:0;transform-box:fill-box;transform-origin:center;animation:ring 1s ease-out both}
 @media (prefers-reduced-motion: reduce){
   .r,.f,.g,.p,.live,.n,.nu,.ti,.sl,.ai,.ro,.rg{animation:none!important;opacity:1!important;transform:none!important}
-  .sh,.rg{display:none}
+  .sh,.rg,.cu{display:none}
+  .cu-end{opacity:1!important}
+  .shine{fill:#e8ecf3!important}
 }
 </style>
 <rect width="880" height="64" rx="16" fill="#070d1a"/>

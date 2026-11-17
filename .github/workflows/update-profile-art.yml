@@ -10,6 +10,10 @@ on:
   push:
     branches: [main]
 
+concurrency:
+  group: update-profile-art
+  cancel-in-progress: true
+
 permissions:
   contents: write
 
@@ -17,14 +21,14 @@ jobs:
   cards:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4.4.0
 
-      - uses: actions/setup-python@v5
+      - uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5.6.0
         with:
           python-version: "3.11"
 
       - name: Install dependencies
-        run: pip install -r scripts/requirements.txt
+        run: pip install --require-hashes -r scripts/requirements.lock.txt
 
       - name: Fetch public contribution calendar
         env:
@@ -36,7 +40,7 @@ jobs:
         run: python scripts/render_readme_cards.py
 
       - name: Commit updated art
-        uses: stefanzweifel/git-auto-commit-action@v5
+        uses: stefanzweifel/git-auto-commit-action@b863ae1933cb653a53c021fe36dbb774e1fb9403 # v5.2.0
         with:
           commit_message: "chore: refresh contribution cards [skip ci]"
           file_pattern: "data/contributions.json cards/*.svg"

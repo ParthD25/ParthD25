@@ -2,14 +2,14 @@
 """Lay the README cards out like GitHub and screenshot them with headless Chrome.
 
 STATIC=1 should be set before rendering the cards so this captures the end frame.
-Pass --animated to load the animated SVGs instead (for a GIF).
+Pass --animated to load the live SVGs (still writes a PNG after delay_ms; encode
+a GIF separately if you need a recording).
 """
 from __future__ import annotations
 
 import argparse
 import os
 import subprocess
-import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -65,8 +65,12 @@ def write_html(out: Path, animated: bool) -> Path:
 
 
 def chrome_shot(html: Path, png: Path, *, width=936, height=2100, delay_ms=1200):
+    png = Path(png)
+    png = png.resolve() if png.is_absolute() else (ROOT / png).resolve()
     png.parent.mkdir(parents=True, exist_ok=True)
+    png.unlink(missing_ok=True)
     url = html.resolve().as_uri()
+    timeout = max(25, int(delay_ms / 1000) + 20)
     cmd = [
         CHROME,
         "--headless=new",
@@ -77,13 +81,16 @@ def chrome_shot(html: Path, png: Path, *, width=936, height=2100, delay_ms=1200)
         "--force-device-scale-factor=2",
         f"--window-size={width},{height}",
         "--default-background-color=ffffffff",
+        f"--virtual-time-budget={delay_ms}",
         f"--screenshot={png}",
         url,
     ]
     try:
-        subprocess.run(cmd, check=False, cwd=ROOT, timeout=25)
-    except subprocess.TimeoutExpired:
-        pass
+        subprocess.run(cmd, check=True, cwd=ROOT, timeout=timeout)
+    except subprocess.TimeoutExpired as exc:
+        raise SystemExit(f"chrome timed out writing {png}") from exc
+    except subprocess.CalledProcessError as exc:
+        raise SystemExit(f"chrome failed ({exc.returncode}) writing {png}") from exc
     if not png.exists():
         raise SystemExit(f"chrome did not write {png}")
     _trim_whitespace(png)
@@ -115,7 +122,11 @@ def _trim_whitespace(png: Path, pad=28):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--animated", action="store_true")
+    parser.add_argument(
+        "--animated",
+        action="store_true",
+        help="screenshot live (non-STATIC) SVGs after a delay; still writes PNG",
+    )
     parser.add_argument("--out", default=str(PREVIEW / "readme_static.png"))
     args = parser.parse_args()
     html = write_html(

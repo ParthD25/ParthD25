@@ -27,7 +27,9 @@
 .rg{opacity:0;transform-box:fill-box;transform-origin:center;animation:ring 1s ease-out both}
 @media (prefers-reduced-motion: reduce){
   .r,.f,.g,.p,.live,.n,.nu,.ti,.sl,.ai,.ro,.rg{animation:none!important;opacity:1!important;transform:none!important}
-  .sh,.rg{display:none}
+  .sh,.rg,.cu{display:none}
+  .cu-end{opacity:1!important}
+  .shine{fill:#e8ecf3!important}
 }
 </style><g transform="translate(4.000 0)">
 <defs>
@@ -52,9 +54,9 @@
   </g>
   <text class="sl" style="animation-delay:1.63s" x="22" y="38" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#e8ecf3">CODE</text>
   <g class="ai" style="animation-delay:1.78s">
-    <g class="n" style="animation-delay:2.58s" transform="translate(251.3 30)">
+    <g transform="translate(251.3 30)"><g class="n" style="animation-delay:2.58s">
       <path d="M0 4 L8 4 M5 1 L8 4 L5 7" fill="none" stroke="#e8ecf3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
+    </g></g>
   </g>
   <g clip-path="url(#slot)"><g class="ro" style="animation-delay:1.73s"><text x="22" y="112" font-family="'Space Grotesk', system-ui, sans-serif" font-weight="700" font-size="44" fill="#e8ecf3">PD<tspan font-weight="500" font-size="28"> GitHub</tspan></text></g></g>
   <text class="r" style="animation-delay:2.03s" x="22" y="154" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="13" fill="#e8ecf3" fill-opacity=".92">Public repos including</text><text class="r" style="animation-delay:2.13s" x="22" y="172" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="13" fill="#e8ecf3" fill-opacity=".92">SimplyWins, RaceShift, Plattr,</text><text class="r" style="animation-delay:2.23s" x="22" y="190" font-family="Inter, system-ui, -apple-system, sans-serif" font-size="13" fill="#e8ecf3" fill-opacity=".92">PawPulse.</text>

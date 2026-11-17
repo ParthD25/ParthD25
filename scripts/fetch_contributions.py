@@ -108,7 +108,11 @@ def fetch_days_scrape():
             count = 0
         else:
             match = re.match(r"(\d+)", text)
-            count = int(match.group(1)) if match else 0
+            if not match:
+                raise RuntimeError(
+                    f"unrecognized contribution tooltip {text!r} for {date}"
+                )
+            count = int(match.group(1))
         days.append(
             {
                 "date": date,
@@ -170,7 +174,7 @@ def build_data(days):
 
     return {
         "username": USERNAME,
-        "generated_at": datetime.datetime.now(datetime.UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": datetime.datetime.now(datetime.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "range": {"start": days[0]["date"], "end": days[-1]["date"]},
         "total_contributions": total,
         "active_days": active_days,
@@ -191,14 +195,14 @@ def fetch_days():
             days = fetch_days_graphql(token)
             print(f"fetched {len(days)} days via GraphQL")
             return days
-        except (RuntimeError, urllib.error.URLError, json.JSONDecodeError, KeyError) as exc:
+        except (RuntimeError, OSError, ValueError, KeyError) as exc:
             errors.append(f"graphql: {exc}")
             print(f"GraphQL fetch failed ({exc}); falling back to HTML scrape", file=sys.stderr)
     try:
         days = fetch_days_scrape()
         print(f"fetched {len(days)} days via HTML scrape")
         return days
-    except (RuntimeError, urllib.error.URLError) as exc:
+    except (RuntimeError, OSError, ValueError) as exc:
         errors.append(f"scrape: {exc}")
         raise SystemExit("could not load contribution calendar: " + " | ".join(errors)) from exc
 

@@ -1,2 +1,7 @@
+# Source pins. CI installs the hashed lockfile:
+#   pip install --require-hashes -r scripts/requirements.lock.txt
+# Regenerate with:
+#   pip-compile --generate-hashes -o scripts/requirements.lock.txt scripts/requirements.txt
 beautifulsoup4==4.12.3
 Pillow==13.0.0
+

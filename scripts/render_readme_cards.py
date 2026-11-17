@@ -124,11 +124,13 @@ BASE_CSS = """
 .rg{opacity:0;transform-box:fill-box;transform-origin:center;animation:ring 1s ease-out both}
 @media (prefers-reduced-motion: reduce){
   .r,.f,.g,.p,.live,.n,.nu,.ti,.sl,.ai,.ro,.rg{animation:none!important;opacity:1!important;transform:none!important}
-  .sh,.rg{display:none}
+  .sh,.rg,.cu{display:none}
+  .cu-end{opacity:1!important}
+  .shine{fill:#e8ecf3!important}
 }
 """
 
-STATIC = bool(os.environ.get("STATIC"))
+STATIC = os.environ.get("STATIC") == "1"
 GAP = 12
 BOTTOM = 12
 COL = W / 3
@@ -154,7 +156,8 @@ def svg(w, h, body, fonts, label, extra_css="", left=0, right=0, bottom=BOTTOM):
     if STATIC:
         css += (
             ".r,.f,.g,.p,.live,.n,.nu,.ti,.sl,.ai,.ro{animation:none!important;"
-            "opacity:1!important;transform:none!important}.sh,.rg{display:none}"
+            "opacity:1!important;transform:none!important}.sh,.rg,.cu{display:none}"
+            ".cu-end{opacity:1!important}.shine{fill:#e8ecf3!important}"
         )
     return (
         f'<svg xmlns="http://www.w3.org/2000/svg" width="{w:.3f}" height="{h}" '
@@ -288,15 +291,15 @@ def hero():
   <text x="114" y="59" font-family="{SANS}" font-size="12" letter-spacing="0" fill="{MUTED}">CMU M.S. · DEC 2027</text>
 </g>
 <text class="r" {d(0.12)} x="44" y="168" font-family="{DISPLAY}" font-weight="700" font-size="86" letter-spacing="-3.2" fill="{BONE}">Parth</text>
-<text class="r" {d(0.28)} x="44" y="254" font-family="{DISPLAY}" font-weight="700" font-size="86" letter-spacing="-3.2" fill="url(#shine)">Dave</text>
+<text class="r shine" {d(0.28)} x="44" y="254" font-family="{DISPLAY}" font-weight="700" font-size="86" letter-spacing="-3.2" fill="url(#shine)">Dave</text>
 <g class="r" {d(0.5)}>
   {text_lines(44, 304, line, 22, f'font-family="{SANS}" font-size="15" fill="{SOFT}"')}
 </g>
 <g class="f" {d(0.75)}>
   <text x="44" y="392" font-family="{MONO}" font-size="12" fill="{BONE}">parthdave.me</text>
-  <g class="nu" transform="translate(158 384)">
+  <g transform="translate(158 384)"><g class="nu">
     <path d="M0 8 L8 0 M8 0 L8 6 M8 0 L2 0" fill="none" stroke="{SILVER}" stroke-width="1.4" stroke-linecap="round"/>
-  </g>
+  </g></g>
 </g>
 {portrait_markup}
 """
@@ -333,8 +336,9 @@ def count_up(num, word, x, y, attrs, begin, dur=1.1, frames=18):
             if i == frames
             else f'<set attributeName="opacity" to="0" begin="{begin + dur * (i + 1) / frames:.3f}s"/>'
         )
+        klass = "cu-end" if i == frames else "cu"
         out.append(
-            f'<text x="{x}" y="{y}" {attrs} opacity="0">{escape(txt)}{tail}'
+            f'<text class="{klass}" x="{x}" y="{y}" {attrs} opacity="0">{escape(txt)}{tail}'
             f'<set attributeName="opacity" to="1" begin="{on:.3f}s"/>{off}</text>'
         )
     return "".join(out)
@@ -385,9 +389,9 @@ def tile(name, label, fill, on, num, word, blurb, delay, pos, big=None):
   </g>
   <text class="sl" {d(delay + 0.35)} x="22" y="38" font-family="{MONO}" font-size="11" fill="{on}">{label}</text>
   <g class="ai" {d(delay + 0.5)}>
-    <g class="n" style="animation-delay:{delay + 1.3:.2f}s" transform="translate({TILE_W - 34:.1f} 30)">
+    <g transform="translate({TILE_W - 34:.1f} 30)"><g class="n" style="animation-delay:{delay + 1.3:.2f}s">
       <path d="M0 4 L8 4 M5 1 L8 4 L5 7" fill="none" stroke="{on}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
+    </g></g>
   </g>
   <g clip-path="url(#slot)"><g class="ro" {d(delay + 0.45)}>{headline}</g></g>
   {blurb_svg}
