@@ -411,8 +411,10 @@ def tile(name, label, fill, on, num, word, blurb, delay, pos, big=None):
 def activity(data):
     h = 348
     monthly = data["monthly"][-12:]
+    # Highlight the busiest completed month, but scale every bar against the
+    # full series so a partial current month cannot overflow the plot area.
     best = max(monthly[:-1] or monthly, key=lambda m: m["total"])
-    top = max(best["total"], 1)
+    top = max((m["total"] for m in monthly), default=1) or 1
     x0, x1, base, maxh, gap = 40, 600, 300, 148, 10
     bw = (x1 - x0 - gap * (len(monthly) - 1)) / max(len(monthly), 1)
     bars = []
