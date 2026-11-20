@@ -225,17 +225,15 @@ def shine_defs():
 # ---- 1 · hero (no portrait) -------------------------------------------------
 HERO_INTRO = [
     "I build full-stack AI products people can actually use.",
-    "I cook, love cars, and snowboarding is still on the list.",
 ]
 HERO_EYEBROW = "AI DEVELOPER"
-HERO_ALT = (
-    "Parth Dave. I build full-stack AI products people can actually use. "
-    "I cook, love cars, and snowboarding is still on the list."
-)
+HERO_ALT = "Parth Dave. I build full-stack AI products people can actually use."
 
 
 def hero():
-    h = 268
+    # One intro line: keep the original name/intro gap, shrink the card so the
+    # bottom padding matches the old three-line hero instead of leaving a hole.
+    h = 220
     body = f"""
 {shine_defs()}
 <rect width="{W}" height="{h}" rx="16" fill="url(#cardbg)"/>

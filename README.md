@@ -2,7 +2,7 @@
      by .github/workflows/update-profile-art.yml. Matched to parthdave.me.
      Keep image rows on one line with no spaces between <a>/<img> tags. -->
 <p align="center">
-<a href="https://www.parthdave.me/"><img src="./cards/hero.svg" width="100%" alt="Parth Dave. I build full-stack AI products people can actually use. I cook, love cars, and snowboarding is still on the list." /></a>
+<a href="https://www.parthdave.me/"><img src="./cards/hero.svg" width="100%" alt="Parth Dave. I build full-stack AI products people can actually use." /></a>
 </p>
 <p align="center">
 <img src="./cards/skills.svg" width="100%" alt="What I build with: languages, ML/AI, web/backend, and cloud/tools" />
