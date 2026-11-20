@@ -57,17 +57,10 @@ def write_html(out: Path, animated: bool) -> Path:
     </p>
     <p><img src="../cards/heatmap.svg{cache}" width="100%" alt=""/></p>
     <p><img src="../cards/activity.svg{cache}" width="100%" alt=""/></p>
-    <p>
-      <img src="../cards/contact-web.svg{cache}" width="32.5%" alt=""/>
-      <img src="../cards/contact-linkedin.svg{cache}" width="32.5%" alt=""/>
-      <img src="../cards/contact-email.svg{cache}" width="32.5%" alt=""/>
-    </p>
     <p class="links">
       <a href="https://www.parthdave.me/">parthdave.me</a>
       &nbsp;·&nbsp;
       <a href="https://www.linkedin.com/in/parth-dave-a0288221a/">LinkedIn</a>
-      &nbsp;·&nbsp;
-      <a href="mailto:pdave7848@gmail.com">pdave7848@gmail.com</a>
     </p>
   </div>
 </body>

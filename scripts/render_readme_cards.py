@@ -5,9 +5,9 @@ Render the profile README's cards as animated SVGs into cards/.
 Design matches parthdave.me: navy ground (#070d1a), bone type, chrome silver,
 Space Grotesk / Inter / JetBrains Mono.
 
-Layout follows recruiter-oriented profile READMEs (clear intro, skills grouped
-by area, featured work, then activity): see awesome-github-profile-readme and
-GitHub's "using your profile to enhance your resume" guide. Clarity over flash.
+Layout follows builder profile READMEs (one line about what he makes, grouped
+tools, projects, then activity): see Avi Vashishta's profile and
+docs/copy_research.md. This is a GitHub showcase, not a resume. Clarity over flash.
 
 Every card is a standalone SVG shown through <img>, so it can only use what
 GitHub allows there: inline CSS keyframes, SMIL, and fonts embedded as data
@@ -100,25 +100,10 @@ REPOS = [
     },
 ]
 
-CONTACTS = [
-    {
-        "name": "web",
-        "label": "PORTFOLIO",
-        "value": "parthdave.me",
-        "href": "https://www.parthdave.me/",
-    },
-    {
-        "name": "linkedin",
-        "label": "LINKEDIN",
-        "value": "Parth Dave",
-        "href": "https://www.linkedin.com/in/parth-dave-a0288221a/",
-    },
-    {
-        "name": "email",
-        "label": "EMAIL",
-        "value": "pdave7848@gmail.com",
-        "href": "mailto:pdave7848@gmail.com",
-    },
+# Small footer only (Avi's README: site / linkedin — no email card).
+LINKS = [
+    {"label": "parthdave.me", "href": "https://www.parthdave.me/"},
+    {"label": "LinkedIn", "href": "https://www.linkedin.com/in/parth-dave-a0288221a/"},
 ]
 
 BASE_CSS = """
@@ -238,13 +223,19 @@ def shine_defs():
 
 
 # ---- 1 · hero (no portrait) -------------------------------------------------
+HERO_INTRO = [
+    "I build full-stack AI products people can actually use.",
+    "I cook, love cars, and snowboarding is still on the list.",
+]
+HERO_EYEBROW = "AI DEVELOPER"
+HERO_ALT = (
+    "Parth Dave. I build full-stack AI products people can actually use. "
+    "I cook, love cars, and snowboarding is still on the list."
+)
+
+
 def hero():
     h = 268
-    intro = [
-        "CMU M.S. student in AI & Systems Management, graduating Dec 2027.",
-        "Seeking Summer 2027 internships in ML/AI, software engineering,",
-        "and solutions engineering.",
-    ]
     body = f"""
 {shine_defs()}
 <rect width="{W}" height="{h}" rx="16" fill="url(#cardbg)"/>
@@ -253,11 +244,11 @@ def hero():
   <rect x="36" y="28" width="36" height="36" rx="10" fill="none" stroke="{SILVER}" stroke-width="1.2"/>
   <text x="54" y="51" text-anchor="middle" font-family="{DISPLAY}" font-weight="700" font-size="13" fill="{SILVER}">PD</text>
   <circle class="live" cx="94" cy="46" r="4" fill="{SILVER}"/>
-  <text x="106" y="51" font-family="{MONO}" font-size="12" fill="{MUTED}">CMU M.S. · DEC 2027 · OPEN TO SUMMER 2027</text>
+  <text x="106" y="51" font-family="{MONO}" font-size="12" fill="{MUTED}">{HERO_EYEBROW}</text>
 </g>
 <text class="r" {d(0.12)} x="36" y="128" font-family="{DISPLAY}" font-weight="700" font-size="56" letter-spacing="-1.8" fill="url(#shine)">Parth Dave</text>
 <g class="r" {d(0.32)}>
-  {text_lines(36, 178, intro, 24, f'font-family="{SANS}" font-size="16" fill="{SOFT}"')}
+  {text_lines(36, 178, HERO_INTRO, 24, f'font-family="{SANS}" font-size="16" fill="{SOFT}"')}
 </g>
 """
     write(
@@ -267,7 +258,7 @@ def hero():
             h,
             body,
             ["display", "sans", "mono"],
-            "Parth Dave. CMU M.S. student in AI & Systems Management, graduating Dec 2027. Seeking Summer 2027 internships in ML/AI, software engineering, and solutions engineering.",
+            HERO_ALT,
         ),
     )
 
@@ -301,8 +292,8 @@ def skills():
 
     body = f"""
 {card_shell(W, h)}
-<text class="f" {d(0.7)} x="36" y="42" font-family="{MONO}" font-size="11" fill="{MUTED}">SKILLS</text>
-<text class="r" {d(0.75)} x="36" y="64" font-family="{DISPLAY}" font-weight="700" font-size="22" fill="{BONE}">Tech stack</text>
+<text class="f" {d(0.7)} x="36" y="42" font-family="{MONO}" font-size="11" fill="{MUTED}">STACK</text>
+<text class="r" {d(0.75)} x="36" y="64" font-family="{DISPLAY}" font-weight="700" font-size="22" fill="{BONE}">What I build with</text>
 {''.join(groups)}
 """
     write(
@@ -312,7 +303,7 @@ def skills():
             h,
             body,
             ["display", "sans", "mono"],
-            "Tech stack: languages, ML/AI, web/backend, cloud/tools",
+            "What I build with: languages, ML/AI, web/backend, cloud/tools",
         ),
     )
 
@@ -468,7 +459,7 @@ def heatmap(data):
     h = gy + 7 * step + 44
     body = f"""
 {card_shell(W, h)}
-<text class="r" {d(1.4)} x="42" y="50" font-family="{DISPLAY}" font-weight="700" font-size="26" fill="{BONE}">GitHub activity</text>
+<text class="r" {d(1.4)} x="42" y="50" font-family="{DISPLAY}" font-weight="700" font-size="26" fill="{BONE}">Every day on GitHub</text>
 <text class="f" {d(1.4)} x="{right}" y="48" text-anchor="end" font-family="{MONO}" font-size="11" fill="{MUTED}">REFRESHED DAILY</text>
 {''.join(cells)}
 <g class="f" {d(2.8)}>{labels}
@@ -492,52 +483,14 @@ def title_building():
     h = 56
     body = f"""
 {card_shell(W, h)}
-<text class="r" {d(1.2)} x="28" y="36" font-family="{DISPLAY}" font-weight="700" font-size="22" fill="{BONE}">Featured work</text>
+<text class="r" {d(1.2)} x="28" y="36" font-family="{DISPLAY}" font-weight="700" font-size="22" fill="{BONE}">What I'm coding</text>
 """
-    write("title-repos.svg", svg(W, h, body, ["display"], "Featured work", bottom=8))
-
-
-# ---- 6 · contact chips ------------------------------------------------------
-CHIP_W, CHIP_H = 880 / 3 - 8, 88
-
-
-def contact_chip(i, item):
-    delay = 3.4 + i * 0.08
-    body = f"""
-{card_shell(CHIP_W, CHIP_H, DEEP if i == 1 else BG)}
-<g class="r" {d(delay)}>
-  <text x="20" y="32" font-family="{MONO}" font-size="11" fill="{MUTED}">{escape(item["label"])}</text>
-  <g transform="translate({CHIP_W - 32:.1f} 24)">
-    <g class="n" style="animation-delay:{delay + 0.6:.2f}s">
-      <path d="M0 4 L8 4 M5 1 L8 4 L5 7" fill="none" stroke="{SILVER}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-    </g>
-  </g>
-  <text x="20" y="60" font-family="{SANS}" font-weight="600" font-size="15" fill="{BONE}">{escape(item["value"])}</text>
-</g>
-"""
-    write(
-        f"contact-{item['name']}.svg",
-        svg(
-            CHIP_W,
-            CHIP_H,
-            body,
-            ["sans", "sans-b", "mono"],
-            f'{item["label"]}: {item["value"]}',
-            left=4 * i,
-            right=8 - 4 * i,
-            bottom=8,
-        ),
-    )
+    write("title-repos.svg", svg(W, h, body, ["display"], "What I'm coding", bottom=8))
 
 
 def write_readme():
-    """Keep README.md in lockstep with REPOS / CONTACTS so links cannot drift."""
-    hero_alt = (
-        "Parth Dave. CMU M.S. student in AI &amp; Systems Management, graduating "
-        "Dec 2027. Seeking Summer 2027 internships in ML/AI, software engineering, "
-        "and solutions engineering."
-    )
-    portfolio = CONTACTS[0]["href"]
+    """Keep README.md in lockstep with REPOS / LINKS so links cannot drift."""
+    portfolio = LINKS[0]["href"]
     rows = []
     for i in range(0, len(REPOS), 2):
         pair = REPOS[i : i + 2]
@@ -547,35 +500,20 @@ def write_readme():
             for r in pair
         )
         rows.append(f'<p align="center">\n{tags}\n</p>')
-    chip_alt = {
-        "web": "Portfolio: parthdave.me",
-        "linkedin": "LinkedIn: parth-dave",
-        "email": "Email: pdave7848@gmail.com",
-    }
-    chips = "".join(
-        f'<a href="{c["href"]}"><img src="./cards/contact-{c["name"]}.svg" '
-        f'width="32.5%" alt="{escape(chip_alt[c["name"]])}" /></a>'
-        for c in CONTACTS
-    )
-    footer_label = {
-        "web": "parthdave.me",
-        "linkedin": "LinkedIn",
-        "email": "pdave7848@gmail.com",
-    }
     footer = " &nbsp;·&nbsp; ".join(
-        f'<a href="{c["href"]}">{escape(footer_label[c["name"]])}</a>' for c in CONTACTS
+        f'<a href="{link["href"]}">{escape(link["label"])}</a>' for link in LINKS
     )
     md = f"""<!-- Cards are animated SVGs from scripts/render_readme_cards.py, refreshed daily
      by .github/workflows/update-profile-art.yml. Matched to parthdave.me.
      Keep image rows on one line with no spaces between <a>/<img> tags. -->
 <p align="center">
-<a href="{portfolio}"><img src="./cards/hero.svg" width="100%" alt="{hero_alt}" /></a>
+<a href="{portfolio}"><img src="./cards/hero.svg" width="100%" alt="{escape(HERO_ALT)}" /></a>
 </p>
 <p align="center">
-<img src="./cards/skills.svg" width="100%" alt="Tech stack grouped by languages, ML/AI, web/backend, and cloud/tools" />
+<img src="./cards/skills.svg" width="100%" alt="What I build with: languages, ML/AI, web/backend, and cloud/tools" />
 </p>
 <p align="center">
-<img src="./cards/title-repos.svg" width="100%" alt="Featured work" />
+<img src="./cards/title-repos.svg" width="100%" alt="What I'm coding" />
 </p>
 {chr(10).join(rows)}
 <p align="center">
@@ -583,9 +521,6 @@ def write_readme():
 </p>
 <p align="center">
 <img src="./cards/activity.svg" width="100%" alt="Contributions in the last 12 months, with streak and active days" />
-</p>
-<p align="center">
-{chips}
 </p>
 <p align="center">
 {footer}
@@ -606,6 +541,4 @@ if __name__ == "__main__":
         repo_card(i, repo)
     heatmap(data)
     activity(data)
-    for i, item in enumerate(CONTACTS):
-        contact_chip(i, item)
     write_readme()
