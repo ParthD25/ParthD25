@@ -2,13 +2,13 @@
      by .github/workflows/update-profile-art.yml. Matched to parthdave.me.
      Keep image rows on one line with no spaces between <a>/<img> tags. -->
 <p align="center">
-<a href="https://www.parthdave.me/"><img src="./cards/hero.svg" width="100%" alt="Parth Dave. CMU M.S. student in AI &amp; Systems Management, graduating Dec 2027. Seeking Summer 2027 internships in ML/AI, software engineering, and solutions engineering." /></a>
+<a href="https://www.parthdave.me/"><img src="./cards/hero.svg" width="100%" alt="Parth Dave. I build full-stack AI products people can actually use." /></a>
 </p>
 <p align="center">
-<img src="./cards/skills.svg" width="100%" alt="Tech stack grouped by languages, ML/AI, web/backend, and cloud/tools" />
+<img src="./cards/skills.svg" width="100%" alt="What I build with: languages, ML/AI, web/backend, and cloud/tools" />
 </p>
 <p align="center">
-<img src="./cards/title-repos.svg" width="100%" alt="Featured work" />
+<img src="./cards/title-repos.svg" width="100%" alt="What I'm coding" />
 </p>
 <p align="center">
 <a href="https://github.com/ParthD25/SimplyWins"><img src="./cards/repo-simplywins.svg" width="49%" alt="SimplyWins: Does this job actually need AI? Tests rules, classic ML and LLMs, then recommends the simplest one that clears the bar." /></a><a href="https://github.com/ParthD25/RaceShift"><img src="./cards/repo-raceshift.svg" width="49%" alt="RaceShift: Forecasts an F1 driver&#x27;s next lap with a network trained one layer at a time, without backpropagation." /></a>
@@ -23,8 +23,5 @@
 <img src="./cards/activity.svg" width="100%" alt="Contributions in the last 12 months, with streak and active days" />
 </p>
 <p align="center">
-<a href="https://www.parthdave.me/"><img src="./cards/contact-web.svg" width="32.5%" alt="Portfolio: parthdave.me" /></a><a href="https://www.linkedin.com/in/parth-dave-a0288221a/"><img src="./cards/contact-linkedin.svg" width="32.5%" alt="LinkedIn: parth-dave" /></a><a href="mailto:pdave7848@gmail.com"><img src="./cards/contact-email.svg" width="32.5%" alt="Email: pdave7848@gmail.com" /></a>
-</p>
-<p align="center">
-<a href="https://www.parthdave.me/">parthdave.me</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/parth-dave-a0288221a/">LinkedIn</a> &nbsp;·&nbsp; <a href="mailto:pdave7848@gmail.com">pdave7848@gmail.com</a>
+<a href="https://www.parthdave.me/">parthdave.me</a> &nbsp;·&nbsp; <a href="https://www.linkedin.com/in/parth-dave-a0288221a/">LinkedIn</a>
 </p>
