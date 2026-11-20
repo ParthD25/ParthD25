@@ -20,8 +20,10 @@
 <rect width="285.3333333333333" height="88" rx="16" fill="#070d1a"/><rect x="0.75" y="0.75" width="283.8333333333333" height="86.5" rx="15.2" fill="none" stroke="#22304d" stroke-width="1"/>
 <g class="r" style="animation-delay:3.56s">
   <text x="20" y="32" font-family="'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace" font-size="11" fill="#9aa6ba">EMAIL</text>
-  <g class="n" style="animation-delay:4.16s" transform="translate(253.3 24)">
-    <path d="M0 4 L8 4 M5 1 L8 4 L5 7" fill="none" stroke="#c9d1de" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate(253.3 24)">
+    <g class="n" style="animation-delay:4.16s">
+      <path d="M0 4 L8 4 M5 1 L8 4 L5 7" fill="none" stroke="#c9d1de" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
   </g>
   <text x="20" y="60" font-family="Inter, system-ui, -apple-system, sans-serif" font-weight="600" font-size="15" fill="#e8ecf3">pdave7848@gmail.com</text>
 </g>

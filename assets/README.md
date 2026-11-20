@@ -1,1 +1,0 @@
-`portrait.jpg` is a downscaled copy of the public headshot at https://www.parthdave.me/about/portrait.jpg (Parth Dave). It is not rendered into the README — GitHub already shows the same photo as the profile avatar.

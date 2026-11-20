@@ -11,7 +11,7 @@
 <img src="./cards/title-repos.svg" width="100%" alt="Featured work" />
 </p>
 <p align="center">
-<a href="https://github.com/ParthD25/SimplyWins"><img src="./cards/repo-simplywins.svg" width="49%" alt="SimplyWins: Does this job actually need AI? Tests rules, classic ML and LLMs, then recommends the simplest one that clears the bar." /></a><a href="https://github.com/ParthD25/RaceShift"><img src="./cards/repo-raceshift.svg" width="49%" alt="RaceShift: Forecasts an F1 driver's next lap with a network trained one layer at a time, without backpropagation." /></a>
+<a href="https://github.com/ParthD25/SimplyWins"><img src="./cards/repo-simplywins.svg" width="49%" alt="SimplyWins: Does this job actually need AI? Tests rules, classic ML and LLMs, then recommends the simplest one that clears the bar." /></a><a href="https://github.com/ParthD25/RaceShift"><img src="./cards/repo-raceshift.svg" width="49%" alt="RaceShift: Forecasts an F1 driver&#x27;s next lap with a network trained one layer at a time, without backpropagation." /></a>
 </p>
 <p align="center">
 <a href="https://github.com/ParthD25/Plattr"><img src="./cards/repo-plattr.svg" width="49%" alt="Plattr: Scan a barcode, see where food came from and how well each claim is backed. Scored A+ to F." /></a><a href="https://github.com/ParthD25/PawPulse"><img src="./cards/repo-pawpulse.svg" width="49%" alt="PawPulse: Vet-clinic platform where AI agents handle intake triage and scheduling." /></a>

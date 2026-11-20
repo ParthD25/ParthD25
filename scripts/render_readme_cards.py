@@ -507,8 +507,10 @@ def contact_chip(i, item):
 {card_shell(CHIP_W, CHIP_H, DEEP if i == 1 else BG)}
 <g class="r" {d(delay)}>
   <text x="20" y="32" font-family="{MONO}" font-size="11" fill="{MUTED}">{escape(item["label"])}</text>
-  <g class="n" style="animation-delay:{delay + 0.6:.2f}s" transform="translate({CHIP_W - 32:.1f} 24)">
-    <path d="M0 4 L8 4 M5 1 L8 4 L5 7" fill="none" stroke="{SILVER}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <g transform="translate({CHIP_W - 32:.1f} 24)">
+    <g class="n" style="animation-delay:{delay + 0.6:.2f}s">
+      <path d="M0 4 L8 4 M5 1 L8 4 L5 7" fill="none" stroke="{SILVER}" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </g>
   </g>
   <text x="20" y="60" font-family="{SANS}" font-weight="600" font-size="15" fill="{BONE}">{escape(item["value"])}</text>
 </g>
@@ -528,6 +530,73 @@ def contact_chip(i, item):
     )
 
 
+def write_readme():
+    """Keep README.md in lockstep with REPOS / CONTACTS so links cannot drift."""
+    hero_alt = (
+        "Parth Dave. CMU M.S. student in AI &amp; Systems Management, graduating "
+        "Dec 2027. Seeking Summer 2027 internships in ML/AI, software engineering, "
+        "and solutions engineering."
+    )
+    portfolio = CONTACTS[0]["href"]
+    rows = []
+    for i in range(0, len(REPOS), 2):
+        pair = REPOS[i : i + 2]
+        tags = "".join(
+            f'<a href="{r["href"]}"><img src="./cards/repo-{r["name"].lower()}.svg" '
+            f'width="49%" alt="{escape(r["name"])}: {escape(r["desc"])}" /></a>'
+            for r in pair
+        )
+        rows.append(f'<p align="center">\n{tags}\n</p>')
+    chip_alt = {
+        "web": "Portfolio: parthdave.me",
+        "linkedin": "LinkedIn: parth-dave",
+        "email": "Email: pdave7848@gmail.com",
+    }
+    chips = "".join(
+        f'<a href="{c["href"]}"><img src="./cards/contact-{c["name"]}.svg" '
+        f'width="32.5%" alt="{escape(chip_alt[c["name"]])}" /></a>'
+        for c in CONTACTS
+    )
+    footer_label = {
+        "web": "parthdave.me",
+        "linkedin": "LinkedIn",
+        "email": "pdave7848@gmail.com",
+    }
+    footer = " &nbsp;·&nbsp; ".join(
+        f'<a href="{c["href"]}">{escape(footer_label[c["name"]])}</a>' for c in CONTACTS
+    )
+    md = f"""<!-- Cards are animated SVGs from scripts/render_readme_cards.py, refreshed daily
+     by .github/workflows/update-profile-art.yml. Matched to parthdave.me.
+     Keep image rows on one line with no spaces between <a>/<img> tags. -->
+<p align="center">
+<a href="{portfolio}"><img src="./cards/hero.svg" width="100%" alt="{hero_alt}" /></a>
+</p>
+<p align="center">
+<img src="./cards/skills.svg" width="100%" alt="Tech stack grouped by languages, ML/AI, web/backend, and cloud/tools" />
+</p>
+<p align="center">
+<img src="./cards/title-repos.svg" width="100%" alt="Featured work" />
+</p>
+{chr(10).join(rows)}
+<p align="center">
+<img src="./cards/heatmap.svg" width="100%" alt="Parth's GitHub contribution graph, refreshed daily" />
+</p>
+<p align="center">
+<img src="./cards/activity.svg" width="100%" alt="Contributions in the last 12 months, with streak and active days" />
+</p>
+<p align="center">
+{chips}
+</p>
+<p align="center">
+{footer}
+</p>
+"""
+    path = os.path.join(ROOT, "README.md")
+    with open(path, "w") as f:
+        f.write(md)
+    print("wrote README.md")
+
+
 if __name__ == "__main__":
     data = json.load(open(DATA))
     hero()
@@ -539,3 +608,4 @@ if __name__ == "__main__":
     activity(data)
     for i, item in enumerate(CONTACTS):
         contact_chip(i, item)
+    write_readme()
