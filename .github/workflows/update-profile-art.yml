@@ -39,4 +39,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: "chore: refresh contribution cards [skip ci]"
-          file_pattern: "data/contributions.json cards/*.svg"
+          file_pattern: "data/contributions.json cards/*.svg README.md"
