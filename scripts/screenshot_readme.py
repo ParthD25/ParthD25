@@ -9,7 +9,6 @@ from __future__ import annotations
 import argparse
 import os
 import subprocess
-import time
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -34,18 +33,19 @@ def write_html(out: Path, animated: bool) -> Path:
     }}
     p {{ margin: 0; line-height: 0; font-size: 0; }}
     img {{ border: 0; vertical-align: top; }}
+    .links {{
+      font: 14px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      text-align: center;
+      padding: 16px 0 8px;
+      color: #0969da;
+    }}
+    .links a {{ color: #0969da; text-decoration: none; }}
   </style>
 </head>
 <body>
   <div class="col">
     <p><img src="../cards/hero.svg{cache}" width="100%" alt=""/></p>
-    <p>
-      <img src="../cards/work.svg{cache}" width="32.5%" alt=""/>
-      <img src="../cards/code.svg{cache}" width="32.5%" alt=""/>
-      <img src="../cards/seek.svg{cache}" width="32.5%" alt=""/>
-    </p>
-    <p><img src="../cards/heatmap.svg{cache}" width="100%" alt=""/></p>
-    <p><img src="../cards/activity.svg{cache}" width="100%" alt=""/></p>
+    <p><img src="../cards/skills.svg{cache}" width="100%" alt=""/></p>
     <p><img src="../cards/title-repos.svg{cache}" width="100%" alt=""/></p>
     <p>
       <img src="../cards/repo-simplywins.svg{cache}" width="49%" alt=""/>
@@ -54,6 +54,20 @@ def write_html(out: Path, animated: bool) -> Path:
     <p>
       <img src="../cards/repo-plattr.svg{cache}" width="49%" alt=""/>
       <img src="../cards/repo-pawpulse.svg{cache}" width="49%" alt=""/>
+    </p>
+    <p><img src="../cards/heatmap.svg{cache}" width="100%" alt=""/></p>
+    <p><img src="../cards/activity.svg{cache}" width="100%" alt=""/></p>
+    <p>
+      <img src="../cards/contact-web.svg{cache}" width="32.5%" alt=""/>
+      <img src="../cards/contact-linkedin.svg{cache}" width="32.5%" alt=""/>
+      <img src="../cards/contact-email.svg{cache}" width="32.5%" alt=""/>
+    </p>
+    <p class="links">
+      <a href="https://www.parthdave.me/">parthdave.me</a>
+      &nbsp;·&nbsp;
+      <a href="https://www.linkedin.com/in/parth-dave-a0288221a/">LinkedIn</a>
+      &nbsp;·&nbsp;
+      <a href="mailto:pdave7848@gmail.com">pdave7848@gmail.com</a>
     </p>
   </div>
 </body>
@@ -64,7 +78,7 @@ def write_html(out: Path, animated: bool) -> Path:
     return out
 
 
-def chrome_shot(html: Path, png: Path, *, width=936, height=2100, delay_ms=1200):
+def chrome_shot(html: Path, png: Path, *, width=936, height=2600, delay_ms=1200):
     png.parent.mkdir(parents=True, exist_ok=True)
     url = html.resolve().as_uri()
     cmd = [
